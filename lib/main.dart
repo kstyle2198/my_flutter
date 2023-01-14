@@ -4,7 +4,26 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int counter = 0;
+
+  void onClicked() {
+    setState(() {
+      counter = counter + 1;
+    });
+  }
+
+  void reSet() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,7 +68,48 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 60,
+                  height: 30,
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      "Click Count",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '$counter',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: onClicked,
+                          icon: const Icon(Icons.add_box_outlined),
+                          color: Colors.amberAccent,
+                          iconSize: 30,
+                        ),
+                        IconButton(
+                          onPressed: reSet,
+                          icon: const Icon(Icons.restore_page),
+                          color: Colors.green,
+                          iconSize: 30,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
